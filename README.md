@@ -1,2 +1,3 @@
-# sbg-parser
-A parser for IMU devices of SBG
+# SB-Parser
+
+A parser for GNSS + IMU devices of SBG
