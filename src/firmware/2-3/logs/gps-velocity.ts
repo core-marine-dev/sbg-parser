@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { bit_test } from "../../../utils"
 /* Message ID 13 -> SBG_ECOM_LOG_GPS1_VEL => GNSS velocity from primary receiver
  * Message ID 16 -> SBG_ECOM_LOG_GPS2_VEL => GNSS velocity from secondary receiver
@@ -101,13 +101,13 @@ const SBG_ECOM_LOG_GPS_VEL = (payload: Buffer) => {
   return data
 }
 
-export const SBG_ECOM_LOG_GPS1_VEL = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_GPS1_VEL = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_GPS1_VEL'
   const data = SBG_ECOM_LOG_GPS_VEL(payload)
   return { name, data }
 }
 
-export const SBG_ECOM_LOG_GPS2_VEL = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_GPS2_VEL = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_GPS2_VEL'
   const data = SBG_ECOM_LOG_GPS_VEL(payload)
   return { name, data }

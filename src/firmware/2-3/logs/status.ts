@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { bit_test } from "../../../utils"
 /* Message ID = 01 -> SBG_ECOM_LOG_STATUS => Status general, clock, com aiding, solution, heave
  * Field          Offset  Size Format Unit Description                                   
@@ -159,7 +159,7 @@ const getAidingStatus = (aidingStatus: number): object => {
   }
 }
 
-export const SBG_ECOM_LOG_STATUS = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_STATUS = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_STATUS'
   const data = {
       timestamp: payload.readUIntLE(0, 4),

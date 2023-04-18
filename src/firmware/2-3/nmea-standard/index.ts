@@ -1,11 +1,13 @@
-import { SBGFrameData, SBGFrameFormat, SBGFrameType } from "../../../types";
+import { UNKNOWN_SBG_FRAME_DATA } from "../../../constants";
+import { SBGDataParser, SBGFrameNameData } from "../../../types";
 
-export const getSBGFrameData = (messageID: number, payload: Buffer): SBGFrameData => {
-  const sbgframedata: SBGFrameData = {
-    name: 'nmea-standard',
-    type: SBGFrameType.NMEA_STANDARD,
-    format: SBGFrameFormat.STANDARD,
-    data: {}
+const nmea = new Map<number, SBGDataParser>()
+
+export const getSBGFrameData = (messageID: number, payload: Buffer): SBGFrameNameData => {
+  const parser = nmea.get(messageID)
+  if (parser) return parser(payload)
+  return {
+    name: UNKNOWN_SBG_FRAME_DATA.name,
+    data: UNKNOWN_SBG_FRAME_DATA.data
   }
-  return sbgframedata
 }

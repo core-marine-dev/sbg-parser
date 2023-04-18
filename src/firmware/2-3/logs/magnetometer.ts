@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { bit_test } from "../../../utils"
 /* Message ID 04 -> SBG_ECOM_LOG_MAG => Magnetic data with associated accelerometer on each axis
  * Field         Offset  Size  Format   Unit  Description                    
@@ -24,7 +24,7 @@ import { bit_test } from "../../../utils"
  *  7   Mask  SBG_ECOM_MAG_ACCELS_IN_RANGE  Set to 1 if accelerometer is not saturated
  *  8   Mask  SBG_ECOM_MAG_CALIBRATION_OK   Set to 1 if magnetometer seems to be calibrated
 */
-export const SBG_ECOM_LOG_MAG = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_MAG = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_MAG'
   const data = {
     timestamp: payload.readUIntLE(0, 4),

@@ -4,44 +4,23 @@ export type SBGLargeFrameDataBuffer = {
   pages: number,
   data: Buffer
 }
-export type SBGLargeFrameData = {
-  transmissionID: number,
-  pageIndex: number,
-  pages: number,
-  data: null | object
-}
 
-export type SBGPayload = Buffer
-
-export type SBGFramePayload = {
-  header: SBGHeader,
-  payload: SBGPayload,
-  footer: SBGFooter
-}
-
-export type SBGFramePayloadBuffer = {
-  sbgFramePayload: SBGFramePayload | null,
-  frame: Buffer
-}
-
-export type SBGParsedData = {
-  name: string,
-  data: object
-}
-
-export type SBGDataParser = (payload: Buffer) => SBGParsedData
-
-export type SBGFrameNameData = {
+export interface SBGFrameNameData {
   name: string,
   data: SBGData,
 }
 
-export type SBGFrameData = {
-  name: string,
-  type: SBGFrameType,
-  format: SBGFrameFormat,
-  data: SBGData,
+export interface SBGFrameNameTypeData extends SBGFrameNameData {
+  type: SBGFrameType
 }
+
+export interface SBGFrameData extends SBGFrameNameTypeData {
+  format: SBGFrameFormat
+}
+
+export type SBGDataParser = (payload: Buffer) => SBGFrameNameData
+
+export type SBGFrameParser = (messageClass: number,  messageID: number, payload: Buffer) => SBGFrameNameTypeData
 
 export enum SBGFrameMessageClass {
   CMD = 0x10,
@@ -67,12 +46,6 @@ export enum SBGFrameFormat {
   LARGE = 'large'
 }
 
-export type SBGBufferFrame = {
-  startIndex?: number,
-  endIndex?: number,
-  frame: Buffer
-}
-
 export type SBGHeader = {
   sync: Buffer,
   messageID: number,
@@ -80,7 +53,7 @@ export type SBGHeader = {
   length: number
 }
 
-export type SBGData = null | object | SBGLargeFrameData
+export type SBGData = object | null
 
 export type SBGFooter = {
   crc: number,
@@ -98,15 +71,8 @@ export type SBGFrameResponse = {
   type: SBGFrameType,
   format: SBGFrameFormat,
   frame: SBGFrame,
-  buffer: SBGBufferFrame
+  buffer: Buffer
 }
 
-// SBFResponse -> Union type of all supported firmware Frames
-export type SBGResponse = {
-  raw: Buffer,
-  frames: SBGFrameResponse[]
-}
+export type SBGParser = (messageClass: number, messageID: number, payload: Buffer) => SBGFrameData
 
-export type SBGParser = (data: Buffer) => SBGResponse
-
-export type Parser = (data: any) => SBGResponse

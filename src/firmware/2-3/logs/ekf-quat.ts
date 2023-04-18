@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { getSolutionStatus } from "./utils"
 /* Message ID 07 -> SBG_ECOM_LOG_EKF_QUAT => Includes the 4 quaternions values
  * Field            Offset  Size  Format  Unit  Description                    
@@ -45,7 +45,7 @@ import { getSolutionStatus } from "./utils"
  *   3   SBG_ECOM_SOL_MODE_NAV_VELOCITY   The Kalman filter computes orientation and velocity. Position is freely integrated from velocity estimation.
  *   4   SBG_ECOM_SOL_MODE_NAV_POSITION   Nominal mode, the Kalman filter computes all parameters (attitude, velocity, position). Absolute position is provided.
 */
-export const SBG_ECOM_LOG_EKF_QUAT = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_EKF_QUAT = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_EKF_QUAT'
   const data = {
       timestamp: payload.readUIntLE(0, 4),

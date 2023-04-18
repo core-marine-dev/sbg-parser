@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { getSolutionStatus } from "./utils"
 /* Message ID 06 -> SBG_ECOM_LOG_EKF_EULER => Includes roll, pitch, yaw and their accuracies on each axis
  * Field            Offset  Size  Format  Unit  Description                    
@@ -44,7 +44,7 @@ import { getSolutionStatus } from "./utils"
  *   3   SBG_ECOM_SOL_MODE_NAV_VELOCITY   The Kalman filter computes orientation and velocity. Position is freely integrated from velocity estimation.
  *   4   SBG_ECOM_SOL_MODE_NAV_POSITION   Nominal mode, the Kalman filter computes all parameters (attitude, velocity, position). Absolute position is provided.
 */
-export const SBG_ECOM_LOG_EKF_EULER = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_EKF_EULER = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_EKF_EULER'
   const data = {
       timestamp: payload.readUIntLE(0, 4),

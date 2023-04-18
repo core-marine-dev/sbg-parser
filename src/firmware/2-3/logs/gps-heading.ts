@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { bit_test } from "../../../utils"
 /* Message ID 15 -> SBG_ECOM_LOG_GPS1_HDT => GNSS true heading from primary receiver
  * Message ID 18 -> SBG_ECOM_LOG_GPS2_HDT => GNSS true heading from secondary receiver
@@ -66,13 +66,13 @@ const SBG_ECOM_LOG_GPS_HDT = (payload: Buffer) => {
   return data
 }
 
-export const SBG_ECOM_LOG_GPS1_HDT = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_GPS1_HDT = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_GPS1_HDT'
   const data = SBG_ECOM_LOG_GPS_HDT(payload)
   return { name, data }
 }
 
-export const SBG_ECOM_LOG_GPS2_HDT = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_GPS2_HDT = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_GPS2_HDT'
   const data = SBG_ECOM_LOG_GPS_HDT(payload)
   return { name, data }

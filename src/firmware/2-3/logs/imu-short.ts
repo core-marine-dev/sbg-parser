@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { bit_test } from "../../../utils"
 /* Message ID 44 -> SBG_ECOM_LOG_IMU_SHORT => Asynchronous delta angles and delta velocities values from IMU directly
  * Field          Offset  Size  Format     Unit  Description                                                    
@@ -41,7 +41,7 @@ const getIMUStatus = (imuStatus: number) => {
   }
 }
 
-export const SBG_ECOM_LOG_IMU_SHORT = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_IMU_SHORT = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_IMU_SHORT'
   const data = {
     timestamp: payload.readUIntLE(0, 4),

@@ -1,11 +1,13 @@
-import { SBGFrameData, SBGFrameFormat, SBGFrameType } from "../../../types";
+import { UNKNOWN_SBG_FRAME_DATA } from "../../../constants";
+import { SBGDataParser, SBGFrameNameData } from "../../../types";
 
-export const getSBGFrameData = (messageID: number, payload: Buffer): SBGFrameData => {
-  const sbgframedata: SBGFrameData = {
-    name: 'high-frquency',
-    type: SBGFrameType.HIGH_FREQ,
-    format: SBGFrameFormat.STANDARD,
-    data: {}
+const highFrequency = new Map<number, SBGDataParser>()
+
+export const getSBGFrameData = (messageID: number, payload: Buffer): SBGFrameNameData => {
+  const parser = highFrequency.get(messageID)
+  if (parser) return parser(payload)
+  return {
+    name: UNKNOWN_SBG_FRAME_DATA.name,
+    data: UNKNOWN_SBG_FRAME_DATA.data
   }
-  return sbgframedata
 }

@@ -1,19 +1,23 @@
-import { SBGParser } from "../types"
-import { getSBGFrames as getSBGFrames2_3 } from "./2-3"
+import { SBGFrameParser, SBGParser } from "../types"
+import { getSBGFrame as getSBGFrame2_3 } from "./2-3"
 
 // Firmwares
-const firmwareParsers = new Map<string, SBGParser>()
+const firmwareParsers = new Map<string, SBGFrameParser>()
 // Add Firmwares
-firmwareParsers.set('2.3', getSBGFrames2_3)
+firmwareParsers.set('2.3', getSBGFrame2_3)
 
 
 const getFirmwares = () => Array.from(firmwareParsers.keys())
 
-const getFirmareParser = (firmare: any) => firmwareParsers.get(firmare)
+const getFirmareParser = (firmare: string): SBGParser => {
+  const parser = firmwareParsers.get(firmare)
+  if (!parser) throwFirmwareError()
+  return parser as SBGParser
+}
 
 const isAvailableFirmware = (firmware: any): boolean => firmwareParsers.has(firmware)
 
-const throwFirmwareError = () => {
+const throwFirmwareError = (): never => {
   // const fmws = new Intl.ListFormat('en', { type: 'unit' }).format(getFirmwares())
   const fmws = Array.from(getFirmwares()).join(', ')
   const error = `Supported firmwares are -> ${fmws}`

@@ -1,4 +1,4 @@
-import { SBGParsedData } from "../../../types"
+import { SBGFrameNameData } from "../../../types"
 import { bit_test } from "../../../utils"
 /* Message ID 02 -> SBG_ECOM_LOG_UTC_TIME => Provides UTC time reference
  * Field         Offset  Size  Format   Unit  Description                                                             
@@ -84,7 +84,7 @@ const getUTCStatus = (utcStatus: number) => {
   if (!bit9 && !bit8 && bit7 && !bit6) return UTCStatus.SBG_ECOM_UTC_VALID
   return UTCStatus.UNKNOWN
 }
-export const SBG_ECOM_LOG_UTC_TIME = (payload: Buffer): SBGParsedData => {
+export const SBG_ECOM_LOG_UTC_TIME = (payload: Buffer): SBGFrameNameData => {
   const name = 'SBG_ECOM_LOG_UTC_TIME'
 
   const data = {

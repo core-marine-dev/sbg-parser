@@ -29,7 +29,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "start": "ts-node-dev ./src/index.ts"
+    "start": "ts-node-dev ./src/index.ts",
+    "example": "ts-node-dev ./examples/example.ts"
   },
   "dependencies": {
     "crc": "^4.3.2"
