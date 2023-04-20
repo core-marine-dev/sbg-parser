@@ -17,6 +17,12 @@ const response = parser.getFrames()
 console.log('parsed')
 // console.log(response)
 console.log(`responses = ${response.length}`)
+let unknown = 0
+let known = 0
 response.forEach(res => {
-  if (res.name !== 'unknown') { console.dir(res) }
+  // if (res.name !== 'unknown') { console.dir(res) }
+  (res.name !== 'unknown') ? known++ : unknown++
 })
+
+console.log(`Unknown frames -> ${unknown}`)
+console.log(`Known   frames -> ${known}`)
