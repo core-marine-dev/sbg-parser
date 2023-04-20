@@ -1,5 +1,7 @@
 import { UNKNOWN_SBG_FRAME_DATA } from "../../../constants"
 import { SBGDataParser, SBGFrameNameData } from "../../../types"
+import { SBG_ECOM_LOG_DEPTH } from "./depth-sensor"
+import { SBG_ECOM_LOG_DVL_BOTTOM_TRACK, SBG_ECOM_LOG_DVL_WATER_TRACK } from "./doppler-velocity"
 import { SBG_ECOM_LOG_EKF_EULER } from "./ekf-euler"
 import { SBG_ECOM_LOG_EKF_NAV } from "./ekf-nav"
 import { SBG_ECOM_LOG_EKF_QUAT } from "./ekf-quat"
@@ -11,8 +13,11 @@ import { SBG_ECOM_LOG_IMU_DATA } from "./imu-data"
 import { SBG_ECOM_LOG_IMU_SHORT } from "./imu-short"
 import { SBG_ECOM_LOG_MAG } from "./magnetometer"
 import { SBG_ECOM_LOG_MAG_CALIB } from "./magnetometer-calibration"
+import { SBG_ECOM_LOG_AIR_DATA } from "./odometer-airdata"
+import { SBG_ECOM_LOG_ODO_VEL } from "./odometer-velocity"
 import { SBG_ECOM_LOG_SHIP_MOTION, SBG_ECOM_LOG_SHIP_MOTION_HP } from "./ship-motion"
 import { SBG_ECOM_LOG_STATUS } from "./status"
+import { SBG_ECOM_LOG_USBL } from "./usbl-position"
 import { SBG_ECOM_LOG_UTC_TIME } from "./utc-time"
 
 const logs = new Map<number, SBGDataParser>()
@@ -60,11 +65,17 @@ logs.set(18, SBG_ECOM_LOG_GPS2_HDT)
 //      38      SBG_ECOM_LOG_GPS2_RAW          GNSS raw data from secondary receiver
 logs.set(38, SBG_ECOM_LOG_GPS2_RAW)
 //      19      SBG_ECOM_LOG_ODO_VEL           Provides odometer velocity measured by the device
+logs.set(19, SBG_ECOM_LOG_ODO_VEL)
 //      36      SBG_ECOM_LOG_AIR_DATA          Barometric altimeter input / output for airdata support
-//      47      SBG_ECOM_LOG_DEPTH             Depth sensor measurement log used for subsea navigation
+logs.set(36, SBG_ECOM_LOG_AIR_DATA)
 //      29      SBG_ECOM_LOG_DVL_BOTTOM_TRACK  Doppler Velocity Log for bottom tracking data
+logs.set(29, SBG_ECOM_LOG_DVL_BOTTOM_TRACK)
 //      30      SBG_ECOM_LOG_DVL_WATER_TRACK   Doppler Velocity log for water layer data
+logs.set(30, SBG_ECOM_LOG_DVL_WATER_TRACK)
+//      47      SBG_ECOM_LOG_DEPTH             Depth sensor measurement log used for subsea navigation
+logs.set(47, SBG_ECOM_LOG_DEPTH)
 //      37      SBG_ECOM_LOG_USBL              Raw USBL position data for subsea navigation
+logs.set(37, SBG_ECOM_LOG_USBL)
 // Miscellaneous Logs
 //      24      SBG_ECOM_LOG_EVENT_A           Event marker sent when a signal is detected on Sync In A pin
 //      25      SBG_ECOM_LOG_EVENT_B           Event marker sent when a signal is detected on Sync In B pin
